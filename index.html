@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            margin: 0.5in 0.6in;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1.5;
+            color: #2d3748;
+            background: #fff;
+            font-size: 10.5pt;
+        }
+        
+        .container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #1a365d;
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 28pt;
+            font-weight: 700;
+            color: #1a365d;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        
+        .title {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #c53030;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            font-size: 10pt;
+            color: #4a5568;
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-info a {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+        
+        /* Section Styling */
+        section {
+            margin-bottom: 18px;
+        }
+        
+        h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 12pt;
+            font-weight: 700;
+            color: #1a365d;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid #cbd5e0;
+            padding-bottom: 5px;
+            margin-bottom: 12px;
+        }
+        
+        /* Summary */
+        .summary {
+            text-align: justify;
+            color: #4a5568;
+            font-size: 10.5pt;
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 25px;
+        }
+        
+        .skill-category {
+            margin-bottom: 6px;
+        }
+        
+        .skill-category strong {
+            color: #1a365d;
+            font-weight: 600;
+            font-size: 10pt;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 4px;
+        }
+        
+        .skill-tag {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: 500;
+        }
+        
+        .skill-tag.highlight {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        /* Experience */
+        .job {
+            margin-bottom: 16px;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3px;
+        }
+        
+        .job-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #1a365d;
+        }
+        
+        .company {
+            font-weight: 600;
+            color: #c53030;
+            font-size: 10.5pt;
+        }
+        
+        .job-meta {
+            text-align: right;
+            font-size: 9.5pt;
+            color: #718096;
+        }
+        
+        .project {
+            margin: 10px 0 10px 0;
+            padding-left: 12px;
+            border-left: 2px solid #e2e8f0;
+        }
+        
+        .project-name {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 10.5pt;
+        }
+        
+        .project-type {
+            font-size: 8.5pt;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-left: 6px;
+        }
+        
+        .project-type.android {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .project-type.python {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .project-link {
+            color: #2b6cb0;
+            text-decoration: none;
+            font-size: 9pt;
+        }
+        
+        .project-desc {
+            color: #4a5568;
+            font-size: 10pt;
+            margin: 4px 0;
+        }
+        
+        .project-tech {
+            font-size: 9pt;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        ul {
+            margin: 8px 0 0 18px;
+        }
+        
+        li {
+            margin-bottom: 4px;
+            color: #4a5568;
+            font-size: 10pt;
+        }
+        
+        li strong {
+            color: #2d3748;
+        }
+        
+        /* Achievements */
+        .achievement {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .achievement-icon {
+            color: #c53030;
+            font-weight: bold;
+        }
+        
+        /* Education */
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .degree {
+            font-weight: 600;
+            color: #1a365d;
+        }
+        
+        .institution {
+            color: #4a5568;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mahivardhan Singh Panwar</h1>
+            <div class="title">Technical Lead - Android / Generative AI</div>
+            <div class="contact-info">
+                <span>+91 7742658282</span>
+                <span>|</span>
+                <span><a href="mailto:singhmahivardhan74@gmail.com">singhmahivardhan74@gmail.com</a></span>
+                <span>|</span>
+                <span>Bengaluru, Karnataka</span>
+                <span>|</span>
+                <span><a href="https://linkedin.com/in/mahivardhan">LinkedIn</a></span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Professional Summary</h2>
+            <p class="summary">
+                Results-driven Technical Lead with <strong>10+ years</strong> of experience architecting scalable Android applications and <strong>2+ years</strong> pioneering <strong>Generative AI and Backend solutions</strong>. Proven track record in designing high-performance SDKs using Clean Architecture, building enterprise-grade LLM integration platforms, and leading cross-functional teams across diverse domains including Telecom, US Healthcare, FinTech, and E-commerce. Expertise in transforming complex AI/ML concepts into production-ready microservices that drive business value.
+            </p>
+        </section>
+
+        <section>
+            <h2>Core Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <strong>Android Development</strong>
+                    <div class="skill-tags">
+                        <span class="skill-tag highlight">Kotlin</span>
+                        <span class="skill-tag highlight">Jetpack Compose</span>
+                        <span class="skill-tag highlight">Clean Architecture</span>
+                        <span class="skill-tag">MVVM</span>
+                        <span class="skill-tag">Coroutines/Flow</span>
+                        <span class="skill-tag">Dagger/Hilt</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <strong>Android SDK and Libraries</strong>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Room Database</span>
+                        <span class="skill-tag">Retrofit</span>
+                        <span class="skill-tag">LiveData</span>
+                        <span class="skill-tag">RxJava</span>
+                        <span class="skill-tag">SDK Development</span>
+                        <span class="skill-tag">Mockito</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <strong>Generative AI and LLM</strong>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Azure OpenAI</span>
+                        <span class="skill-tag">OpenAI API</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                        <span class="skill-tag">LLM Integration</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <strong>Backend and DevOps</strong>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+            
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">Technical Lead</span> - <span class="company">Rakuten</span>
+                    </div>
+                    <div class="job-meta">
+                        May 2020 - Present<br>Bengaluru, India
+                    </div>
+                </div>
+                
+                <!-- ANDROID PROJECTS FIRST -->
+                <div class="project">
+                    <div class="project-name">Rakuten AI for Link - Voice AI SDK <span class="project-type android">Android</span></div>
+                    <a class="project-link" href="https://tinyurl.com/5h42mnzr" target="_blank">View Project</a>
+                    <p class="project-desc">
+                        Architected an intelligent AI agent SDK within Rakuten Link mobile app, leveraging LLM capabilities to deliver hyper-personalized recommendations and proactive issue resolution for millions of users.
+                    </p>
+                    <ul>
+                        <li><strong>Designed Voice AI SDK</strong> providing chat interface for Japanese users with speech-to-text capabilities using Nuance DLGaaS (Dialog as a Service)</li>
+                        <li>Integrated with Nuance Mix for NLU, enabling natural language understanding across 40+ intent categories</li>
+                        <li>Implemented context-aware personalization engine analyzing user behavior patterns for tailored mobile experiences</li>
+                        <li>Built modular SDK architecture following Clean Architecture principles for easy integration into Link app</li>
+                    </ul>
+                    <p class="project-tech">Tech: Kotlin, Nuance DLGaaS, Clean Architecture, MVVM, Coroutines, Hilt, Retrofit</p>
+                </div>
+
+                <div class="project">
+                    <div class="project-name">My Rakuten Mobile - eCare SDK <span class="project-type android">Android</span></div>
+                    <a class="project-link" href="https://tinyurl.com/2p8baxw2" target="_blank">View Project</a>
+                    <p class="project-desc">
+                        Developed membership chatbot SDK enabling Rakuten Mobile subscribers to access billing statements, application status, and personalized support within the My Rakuten Mobile app.
+                    </p>
+                    <ul>
+                        <li>Implemented user experience scenarios with context-aware responses using Clean Architecture</li>
+                        <li>Integrated secure authentication flow for subscriber data access</li>
+                        <li>Built reusable SDK components for seamless integration across Rakuten Mobile apps</li>
+                    </ul>
+                    <p class="project-tech">Tech: Kotlin, Retrofit, Coroutines, Clean Architecture, MVVM, Hilt, Room Database</p>
+                </div>
+
+                <!-- PYTHON/BACKEND PROJECTS -->
+                <div class="project">
+                    <div class="project-name">CXD Personalization Engine <span class="project-type python">Python Backend</span></div>
+                    <p class="project-desc">
+                        Built a high-performance personalization microservice delivering real-time user profiling and intelligent recommendations for RMAA chatbot widget across Rakuten Mobile platform.
+                    </p>
+                    <ul>
+                        <li><strong>Architected backend with FastAPI</strong> serving 100K+ daily decisions with less than 100ms latency</li>
+                        <li>Implemented <strong>DoCoMo network detection</strong> algorithm for intelligent carrier-based personalization</li>
+                        <li>Designed <strong>rule evaluation engine</strong> processing 15+ user profile enrichment facts for sophisticated targeting</li>
+                        <li>Built <strong>Redis-based session management</strong> with secure envelope passing between widget and chat backend</li>
+                        <li>Integrated with Profile Enrichment API for real-time user behavior analysis</li>
+                        <li>Implemented BigQuery analytics pipeline for comprehensive decision tracking and A/B testing</li>
+                    </ul>
+                    <p class="project-tech">Tech: Python, FastAPI, Redis, BigQuery, Pydantic, Docker, Kubernetes</p>
+                </div>
+
+                <div class="project">
+                    <div class="project-name">LLM Common Layer - Enterprise AI Platform <span class="project-type python">Python Backend</span></div>
+                    <p class="project-desc">
+                        Designed and developed a unified middleware platform enabling seamless LLM integration across multiple business units, eliminating code duplication and accelerating AI adoption.
+                    </p>
+                    <ul>
+                        <li><strong>Built multi-provider LLM abstraction layer</strong> supporting Azure OpenAI and OpenAI APIs through a single unified interface</li>
+                        <li>Developed <strong>self-service onboarding API</strong> allowing teams to register API keys, models, business unit names, and custom prompts</li>
+                        <li>Implemented <strong>Firestore-based configuration management</strong> storing provider credentials, model mappings, and prompt templates</li>
+                        <li><strong>Reduced integration time from weeks to hours</strong> - teams simply call the microservice with model name and BU identifier</li>
+                        <li>Created dynamic prompt injection system allowing teams to manage prompts via API without code changes</li>
+                        <li>Enabled secure multi-tenancy with isolated credential storage and audit logging per business unit</li>
+                    </ul>
+                    <p class="project-tech">Tech: Python, FastAPI, Firestore, Azure OpenAI, OpenAI API, Docker</p>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">Senior Software Engineer</span> - <span class="company">NextGen Healthcare</span>
+                    </div>
+                    <div class="job-meta">
+                        Apr 2018 - Apr 2020<br>Bengaluru, India
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <div class="project-name">NextGen Mobile Solution (Entrada) <span class="project-type android">Android</span></div>
+                    <a class="project-link" href="https://tinyurl.com/vqf3739" target="_blank">View Project</a>
+                    <p class="project-desc">
+                        Healthcare application accelerating clinical documentation with AI-powered voice-to-text transcription for ambulatory and acute EHR systems.
+                    </p>
+                    <ul>
+                        <li>Designed application architecture enabling real-time audio-to-text conversion using Nvoq service</li>
+                        <li>Led code reviews and mentored team of 4 developers on Android best practices</li>
+                        <li>Coordinated with cross-functional teams (Design, Backend, QA) for product delivery</li>
+                    </ul>
+                    <p class="project-tech">Tech: Java, Kotlin, RxJava, Retrofit, Room Database, MVVM</p>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">Senior Android Developer</span> - <span class="company">MasterCard (PRI India Pvt Ltd)</span>
+                    </div>
+                    <div class="job-meta">
+                        May 2017 - Apr 2018<br>Vadodara, India
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <div class="project-name">CitiPay - Mobile Wallet and NFC Payments (US) <span class="project-type android">Android</span></div>
+                    <p class="project-desc">
+                        Enterprise mobile wallet enabling cloud-based NFC payments for Citibank cardholders with secure tokenization.
+                    </p>
+                    <ul>
+                        <li>Architected payment flow with HCE (Host Card Emulation) for contactless transactions</li>
+                        <li>Implemented card provisioning and in-app checkout functionality</li>
+                        <li>Ensured PCI-DSS compliance in payment processing module</li>
+                    </ul>
+                    <p class="project-tech">Tech: Java, HCE, NFC, Retrofit, Dagger, RxJava</p>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">Android Developer</span> - <span class="company">Innovify</span>
+                    </div>
+                    <div class="job-meta">
+                        Oct 2013 - Apr 2017<br>Ahmedabad, India
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <div class="project-name">OneWayCab <span class="project-type android">Android</span></div>
+                    <p class="project-desc">India's leading inter-city taxi booking platform with real-time driver tracking and seamless booking experience.</p>
+                    <p class="project-tech">Tech: Java, Google Maps API, Retrofit, SQLite</p>
+                </div>
+                
+                <div class="project">
+                    <div class="project-name">Instantt <span class="project-type android">Android</span></div>
+                    <p class="project-desc">Local commerce app with Stripe wallet integration, location-based offers, and in-app payments.</p>
+                    <p class="project-tech">Tech: Java, Stripe SDK, Google Places API, Retrofit</p>
+                </div>
+                
+                <div class="project">
+                    <div class="project-name">Bluetooth Remote Control <span class="project-type android">Android</span></div>
+                    <p class="project-desc">Cross-device control app for selfie capture and media playback via Bluetooth connectivity.</p>
+                    <p class="project-tech">Tech: Java, Bluetooth API, Android Media APIs</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Key Achievements</h2>
+            <div class="achievement">
+                <span class="achievement-icon">*</span>
+                <span>Awarded prestigious <strong>"E" certification</strong> under Rakuten E-Rank Program (Jun 2022 - Dec 2022) - Top performer recognition</span>
+            </div>
+            <div class="achievement">
+                <span class="achievement-icon">*</span>
+                <span>Built LLM Common Layer reducing AI integration time from <strong>weeks to hours</strong> for 5+ business units</span>
+            </div>
+            <div class="achievement">
+                <span class="achievement-icon">*</span>
+                <span>Designed personalization engine processing <strong>100K+ daily decisions</strong> with sub-100ms latency</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="education-item">
+                <div>
+                    <span class="degree">Bachelor of Technology - Information Technology</span>
+                    <div class="institution">Rajasthan Technical University, Kota</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
